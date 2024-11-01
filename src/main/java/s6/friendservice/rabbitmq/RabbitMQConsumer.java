@@ -3,18 +3,21 @@ package s6.friendservice.rabbitmq;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+import s6.friendservice.datalayer.IFriendsRelationshipDal;
 import s6.friendservice.datalayer.IPostDal;
 import s6.friendservice.datalayer.IUserDal;
 import s6.friendservice.datalayer.entities.Post;
 import s6.friendservice.datalayer.entities.User;
 import s6.friendservice.dto.PostCreatedEvent;
 import s6.friendservice.dto.UserCreatedEvent;
+import s6.friendservice.dto.UserDeletedEvent;
 
 @Service
 @AllArgsConstructor
 public class RabbitMQConsumer {
     private IUserDal userDal;
     private IPostDal postDal;
+    private final IFriendsRelationshipDal friendsRelationshipDal;
     @RabbitListener(queues = "user-create-queue")
     public void handleUserCreatedEvent(UserCreatedEvent userCreatedEvent){
         System.out.println("Received User Created Event: " + userCreatedEvent);
@@ -41,6 +44,12 @@ public class RabbitMQConsumer {
                         .userId(event.getUserId())
                         .build()
         );
+    }
+
+    @RabbitListener(queues = "user-delete-queue")
+    public void consumeUserDeletedEvent(UserDeletedEvent userDeletedEvent){
+        System.out.println("Received User Deleted Event: " + userDeletedEvent);
+        friendsRelationshipDal.deleteAllFriendRelationshipsOfUserWithId(userDeletedEvent.getId());
     }
 
 //    // Listen to user update events

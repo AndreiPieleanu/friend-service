@@ -18,14 +18,14 @@ import s6.friendservice.servicelayer.FriendService;
 import java.util.List;
 
 @RestController
-@RequestMapping("notifications")
+@RequestMapping("/api/notifications")
 @AllArgsConstructor
 public class FriendController {
     private final FriendService friendService;
-    private final SimpMessagingTemplate messagingTemplate;
     @PostMapping
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN", "ROLE_MODERATOR"})
     public ResponseEntity<Void> sendFriendRequest(@RequestBody NotificationMessageRequest message){
-        messagingTemplate.convertAndSend("/topic/publicmessages", message);
         CreateFollowRequest request = CreateFollowRequest
                 .builder()
                 .senderId(Integer.parseInt(message.getFrom()))

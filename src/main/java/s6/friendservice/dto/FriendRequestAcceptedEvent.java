@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FriendRequestCreatedEvent {
+public class FriendRequestAcceptedEvent {
     private Integer senderId;
     private Integer receiverId;
-    private Boolean isAccepted = false;
     // Any other relevant fields.
 }

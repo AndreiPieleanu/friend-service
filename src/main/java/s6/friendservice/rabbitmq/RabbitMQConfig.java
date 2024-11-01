@@ -16,11 +16,19 @@ public class RabbitMQConfig {
     public TopicExchange friendExchange(){ return new TopicExchange("friend-exchange"); }
 
     @Bean
-    public Queue friendCreateQueue(){ return new Queue("friend-queue"); }
+    public Queue friendCreateQueue(){ return new Queue("friend-create-queue"); }
+
+    @Bean
+    public Queue friendDeleteQueue(){ return new Queue("friend-delete-queue"); }
 
     @Bean
     public Binding bindingCreateFriend(Queue friendCreateQueue, TopicExchange friendExchange){
         return BindingBuilder.bind(friendCreateQueue).to(friendExchange).with("friend.created");
+    }
+
+    @Bean
+    public Binding bindingDeleteFriend(Queue friendDeleteQueue, TopicExchange friendExchange){
+        return BindingBuilder.bind(friendDeleteQueue).to(friendExchange).with("friend.deleted");
     }
 
     // User-related configuration
