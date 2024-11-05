@@ -1,4 +1,4 @@
-package s6.friendservice.servicelayer;
+package s6.friendservice.servicelayer.token;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

@@ -1,4 +1,4 @@
-package s6.friendservice.servicelayer;
+package s6.friendservice.servicelayer.token;
 
 
 import s6.friendservice.configuration.AccessToken;

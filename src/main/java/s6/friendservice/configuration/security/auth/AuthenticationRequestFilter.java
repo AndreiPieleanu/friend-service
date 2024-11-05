@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import s6.friendservice.configuration.AccessToken;
-import s6.friendservice.servicelayer.IAccessTokenDecoder;
+import s6.friendservice.servicelayer.token.IAccessTokenDecoder;
 import s6.friendservice.servicelayer.customexceptions.InvalidAccessTokenException;
 
 import java.io.IOException;

@@ -146,6 +146,40 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version> <!-- Use the latest version -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/s6/friendservice/servicelayer/*</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/s6/friendservice/configuration/**/*</exclude>
+                                <exclude>**/s6/friendservice/controller/**/*</exclude>
+                                <exclude>**/s6/friendservice/datalayer/**/*</exclude>
+                                <exclude>**/s6/friendservice/dto/**/*</exclude>
+                                <exclude>**/s6/friendservice/rabbitmq/**/*</exclude>
+                                <exclude>**/s6/friendservice/FriendServiceApplication.java</exclude>
+                                <exclude>**/s6/friendservice/servicelayer/customexceptions/**/*</exclude>
+                                <exclude>**/s6/friendservice/servicelayer/token/**/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
