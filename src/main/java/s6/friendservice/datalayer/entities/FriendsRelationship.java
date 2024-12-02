@@ -15,9 +15,9 @@ public class FriendsRelationship {
     @Column(name = "id")
     @EqualsAndHashCode.Exclude
     private Integer id;
-    @Column(nullable = false)
+    @Column(name = "senderId", nullable = false)
     private Integer senderId;
-    @Column(nullable = false)
+    @Column(name = "receiverId", nullable = false)
     private Integer receiverId;
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

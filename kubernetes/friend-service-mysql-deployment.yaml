@@ -22,15 +22,22 @@ spec:
     spec:
       containers:
         - env:
-            - name: MYSQL_DATABASE
-              value: friend-service
-            - name: MYSQL_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD
               value: admin
-            - name: MYSQL_friend
-              value: root
+            - name: MYSQL_DATABASE
+              value: friend_service
+            - name: MYSQL_ROOT_HOST
+              value: "%"
           image: mysql:8.0
           name: friend-service-mysql
           ports:
             - containerPort: 3306
               protocol: TCP
+          volumeMounts:
+            - name: mysql-data-friend
+              mountPath: /var/lib/mysql
       restartPolicy: Always
+      volumes:
+        - name: mysql-data-friend
+          persistentVolumeClaim:
+            claimName: mysql-pvc-friend
